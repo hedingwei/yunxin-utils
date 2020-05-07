@@ -15,7 +15,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Random;
 
-public class CommonUtils {
+public class Work {
 
 
 
