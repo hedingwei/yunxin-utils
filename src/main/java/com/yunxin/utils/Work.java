@@ -4,14 +4,20 @@ import com.yunxin.utils.bytes.Pack;
 import com.yunxin.utils.bytes.UnPack;
 import com.yunxin.utils.compression.FileZip;
 import com.yunxin.utils.other.*;
+import com.yunxin.utils.security.*;
+import com.yunxin.utils.ui.SystemTrayManager;
+import com.yunxin.utils.ui.TrayPopupMenu;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionListener;
 import java.awt.image.RenderedImage;
 import java.io.*;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.Map;
 import java.util.Random;
 
@@ -431,6 +437,198 @@ public class Work {
 
         public static Object get(Class objectT, String field) throws Throwable {
             return com.yunxin.utils.Reflection.get(objectT, field);
+        }
+    }
+
+    public static class Security{
+        public static class RSA2048{
+            com.yunxin.utils.security.RSA2048 r;
+
+            public static Map<String, Object> generateRSAKeyPairs() throws NoSuchAlgorithmException {
+                return com.yunxin.utils.security.RSA2048.generateRSAKeyPairs();
+            }
+
+            public static byte[] sign(byte[] data, PrivateKey privateKey) {
+                return com.yunxin.utils.security.RSA2048.sign(data, privateKey);
+            }
+
+            public static boolean verify(byte[] data, byte[] signature, PublicKey publicKey) {
+                return com.yunxin.utils.security.RSA2048.verify(data, signature, publicKey);
+            }
+
+            public static PrivateKey privateKey(String key) {
+                return com.yunxin.utils.security.RSA2048.privateKey(key);
+            }
+
+            public static PublicKey publicKey(String key) {
+                return com.yunxin.utils.security.RSA2048.publicKey(key);
+            }
+
+            public static byte[] base64Decode(String key) {
+                return com.yunxin.utils.security.RSA2048.base64Decode(key);
+            }
+
+            public static String base64Encode(byte[] data) {
+                return com.yunxin.utils.security.RSA2048.base64Encode(data);
+            }
+
+            public static byte[] sign(byte[] data, String privateKey) {
+                return com.yunxin.utils.security.RSA2048.sign(data, privateKey);
+            }
+
+            public static boolean verify(byte[] data, byte[] signature, String publicKey) {
+                return com.yunxin.utils.security.RSA2048.verify(data, signature, publicKey);
+            }
+
+            public static byte[] encryptByPublicKey(byte[] data, String key) {
+                return com.yunxin.utils.security.RSA2048.encryptByPublicKey(data, key);
+            }
+
+            public static byte[] encryptByPrivateKey(byte[] data, String key) {
+                return com.yunxin.utils.security.RSA2048.encryptByPrivateKey(data, key);
+            }
+
+            public static byte[] decryptByPrivateKey(byte[] data, String key) {
+                return com.yunxin.utils.security.RSA2048.decryptByPrivateKey(data, key);
+            }
+
+            public static byte[] decryptByPublicKey(byte[] data, String key) {
+                return com.yunxin.utils.security.RSA2048.decryptByPublicKey(data, key);
+            }
+        }
+
+        public static class RSA2014{
+            com.yunxin.utils.security.RSA1024 r;
+
+            public static Map<String, Object> generateRSAKeyPairs() throws NoSuchAlgorithmException {
+                return RSA1024.generateRSAKeyPairs();
+            }
+
+            public static byte[] sign(byte[] data, PrivateKey privateKey) {
+                return com.yunxin.utils.security.RSA2048.sign(data, privateKey);
+            }
+
+            public static boolean verify(byte[] data, byte[] signature, PublicKey publicKey) {
+                return com.yunxin.utils.security.RSA2048.verify(data, signature, publicKey);
+            }
+
+            public static PrivateKey privateKey(String key) {
+                return com.yunxin.utils.security.RSA2048.privateKey(key);
+            }
+
+            public static PublicKey publicKey(String key) {
+                return com.yunxin.utils.security.RSA2048.publicKey(key);
+            }
+
+            public static byte[] base64Decode(String key) {
+                return com.yunxin.utils.security.RSA2048.base64Decode(key);
+            }
+
+            public static String base64Encode(byte[] data) {
+                return com.yunxin.utils.security.RSA2048.base64Encode(data);
+            }
+
+            public static byte[] sign(byte[] data, String privateKey) {
+                return com.yunxin.utils.security.RSA2048.sign(data, privateKey);
+            }
+
+            public static boolean verify(byte[] data, byte[] signature, String publicKey) {
+                return com.yunxin.utils.security.RSA2048.verify(data, signature, publicKey);
+            }
+
+            public static byte[] encryptByPublicKey(byte[] data, String key) {
+                return com.yunxin.utils.security.RSA2048.encryptByPublicKey(data, key);
+            }
+
+            public static byte[] encryptByPrivateKey(byte[] data, String key) {
+                return com.yunxin.utils.security.RSA2048.encryptByPrivateKey(data, key);
+            }
+
+            public static byte[] decryptByPrivateKey(byte[] data, String key) {
+                return com.yunxin.utils.security.RSA2048.decryptByPrivateKey(data, key);
+            }
+
+            public static byte[] decryptByPublicKey(byte[] data, String key) {
+                return com.yunxin.utils.security.RSA2048.decryptByPublicKey(data, key);
+            }
+        }
+
+        public static class AES_CBC{
+            com.yunxin.utils.security.AES_CBC c;
+
+            public static byte[] encrypt(byte[] data, byte[] key, byte[] iv) throws Exception {
+                return com.yunxin.utils.security.AES_CBC.encrypt(data, key, iv);
+            }
+
+            public static byte[] decrypt(byte[] data, byte[] key, byte[] iv) throws Exception {
+                return com.yunxin.utils.security.AES_CBC.decrypt(data, key, iv);
+            }
+
+            public static String encrypt(String sSrc, String sKey, String iv) throws Exception {
+                return com.yunxin.utils.security.AES_CBC.encrypt(sSrc, sKey, iv);
+            }
+
+            public static String decrypt(String sSrc, String sKey, String iv) throws Exception {
+                return com.yunxin.utils.security.AES_CBC.decrypt(sSrc, sKey, iv);
+            }
+        }
+
+        public static class AES_ECB{
+            com.yunxin.utils.security.AES_ECB r;
+
+            public static String getAESRandomKey() {
+                return com.yunxin.utils.security.AES_ECB.getAESRandomKey();
+            }
+
+            public static String KeyCreate(int KeyLength) {
+                return com.yunxin.utils.security.AES_ECB.KeyCreate(KeyLength);
+            }
+
+            public static String getAESRandomKey1() {
+                return com.yunxin.utils.security.AES_ECB.getAESRandomKey1();
+            }
+
+            public static byte[] encrypt(byte[] sSrc, String sKey) {
+                return com.yunxin.utils.security.AES_ECB.encrypt(sSrc, sKey);
+            }
+
+            public static byte[] decrypt(byte[] sSrc, String sKey) {
+                return com.yunxin.utils.security.AES_ECB.decrypt(sSrc, sKey);
+            }
+
+            public static byte[] md5(byte[] data) {
+                return com.yunxin.utils.security.AES_ECB.md5(data);
+            }
+        }
+
+        public static class Tea{
+            com.yunxin.utils.security.Tea t;
+
+            public static byte[] encrypt(byte[] data, byte[] key) {
+                return com.yunxin.utils.security.Tea.encrypt(data, key);
+            }
+
+            public static byte[] decrypt(byte[] data, byte[] key) {
+                return com.yunxin.utils.security.Tea.decrypt(data, key);
+            }
+        }
+    }
+
+    public static class UI {
+        public static class SystemTray{
+            public static void setSystemTrayInfo(String title, Image image, ActionListener actionListener){
+                SystemTrayManager.getInstance().setTrayIconText(title);
+                SystemTrayManager.getInstance().setTrayIconImage(image);
+                SystemTrayManager.getInstance().setTrayIconActionListener(actionListener);
+            }
+
+            public static TrayPopupMenu getPopupMenu(){
+                return SystemTrayManager.getInstance().getPopupMenu();
+            }
+
+            public static void rebuild(){
+                SystemTrayManager.getInstance().rebuild();
+            }
         }
     }
 

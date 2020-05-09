@@ -14,4 +14,12 @@
 	</properties>
 
 
+	<dependencies>
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf</artifactId>
+			<version>0.26</version>
+		</dependency>
+	</dependencies>
+
 </project>
