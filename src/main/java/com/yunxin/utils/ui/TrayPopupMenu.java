@@ -10,7 +10,6 @@ import javax.swing.plaf.basic.BasicPopupMenuUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,7 +61,6 @@ public class TrayPopupMenu extends JPopupMenu {
 
                 @Override
                 public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                    System.out.println("e: -> invisible");
                     remove(systemHideMenuSeparator);
                     remove(systemHideMenu);
                     setSystemHideMenuActivated(false);

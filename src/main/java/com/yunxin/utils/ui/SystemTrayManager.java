@@ -2,14 +2,9 @@ package com.yunxin.utils.ui;
 
 
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
 
 public class SystemTrayManager {
 
@@ -26,6 +21,28 @@ public class SystemTrayManager {
     TrayPopupMenu popupMenu = null;
 
     ActionListener trayIconActionListener = null;
+
+    AnimationPlayListener listener = new AnimationPlayListener() {
+        @Override
+        public void onStart() {
+            backupTrayImage = trayIcon.getImage();
+            isInAnimation = true;
+        }
+
+        @Override
+        public void onPlay(int index, Image image) {
+            updateTrayIconImage(image);
+            isInAnimation = true;
+        }
+
+        @Override
+        public void onStop() {
+            trayIcon.setImage(backupTrayImage);
+            isInAnimation = false;
+        }
+    };
+
+
 
     public void setTrayIconImage(Image trayIconImage) {
         this.trayIconImage = trayIconImage;
@@ -64,11 +81,6 @@ public class SystemTrayManager {
             }catch (Throwable t){ }
         }
 
-
-
-
-
-
         trayIcon = new MyTrayIcon(trayIconImage, trayIconText, popupMenu);
         trayIcon.setImageAutoSize(true);
         if(trayIconActionListener!=null){
@@ -88,8 +100,13 @@ public class SystemTrayManager {
         } catch (Throwable e) {
             e.printStackTrace();
         }
+    }
 
-
+    public void updateTrayIconImage(Image image){
+        if(trayIcon!=null){
+            trayIcon.setImage(image);
+            this.trayIconImage = image;
+        }
     }
 
     public synchronized void init(){
@@ -130,6 +147,25 @@ public class SystemTrayManager {
     public TrayIcon getTrayIcon() {
         return trayIcon;
     }
+
+
+
+    Image backupTrayImage = null;
+
+    private boolean isInAnimation = false;
+
+
+    public void playIconAnimation(Animator animator){
+        if(!isInAnimation){
+            backupTrayImage = trayIcon.getImage();
+            animator.setPlayListener(listener);
+            animator.start();
+        }else{
+
+        }
+
+    }
+
 
 
 
