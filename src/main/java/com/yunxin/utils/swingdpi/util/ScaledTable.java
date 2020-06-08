@@ -31,7 +31,7 @@ public class ScaledTable extends JTable {
         super(numRows, numColumns);
     }
 
-    public ScaledTable(Vector<?> rowData, Vector<?> columnNames) {
+    public ScaledTable(Vector rowData, Vector columnNames) {
         super(rowData, columnNames);
     }
 

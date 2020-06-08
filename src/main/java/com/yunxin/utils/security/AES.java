@@ -33,9 +33,9 @@ public class AES {
              * JceSecurity.defaultPolicy.perms.clear();
              * JceSecurity.defaultPolicy.add(CryptoAllPermission.INSTANCE);
              */
-            Class<?> jceSecurity = Class.forName("javax.crypto.JceSecurity");
-            Class<?> cryptoPermissions = Class.forName("javax.crypto.CryptoPermissions");
-            Class<?> cryptoAllPermission = Class.forName("javax.crypto.CryptoAllPermission");
+            Class jceSecurity = Class.forName("javax.crypto.JceSecurity");
+            Class cryptoPermissions = Class.forName("javax.crypto.CryptoPermissions");
+            Class cryptoAllPermission = Class.forName("javax.crypto.CryptoAllPermission");
 
             Field isRestrictedField = jceSecurity.getDeclaredField("isRestricted");
             isRestrictedField.setAccessible(true);
