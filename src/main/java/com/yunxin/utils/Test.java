@@ -1,17 +1,14 @@
 package com.yunxin.utils;
 
-import com.yunxin.utils.bytes.Pack;
 import com.yunxin.utils.ui.SystemTrayManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.net.URL;
 
-public class Test {
+public class Test implements ITest {
 
     public static void main(String[] args) throws Throwable {
 

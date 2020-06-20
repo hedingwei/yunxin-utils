@@ -17,6 +17,12 @@ public class UnPack {
         return byteBuffer.getLong();
     }
 
+    public float getFloat(){ return byteBuffer.getFloat();}
+
+    public double getDouble() {return byteBuffer.getDouble();}
+
+    public boolean getBoolean(){ return byteBuffer.get()==1?true:false;}
+
     public byte[] getBin(int len){
         int restLen = getRestLen();
         byte[] bin = new byte[Math.min(len,restLen)];

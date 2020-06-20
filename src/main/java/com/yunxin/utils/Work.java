@@ -53,6 +53,8 @@ public class Work {
         return IMEIGen.genCodeLong(random(Long.parseLong("35254112521400"), Long.parseLong("35254119621500")) + "");
     }
 
+
+
     public static void copy2Clipboard(String data) {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(data), null);
     }

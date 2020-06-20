@@ -37,7 +37,34 @@ public class Reflection {
                 e.printStackTrace();
             }
         }catch (Throwable t){}
+    }
 
+    public static Object callObjectMethodWithReturnValue(Object object, String method, Object... paras){
+        try{
+            Class[] pclss = new Class[paras.length];
+            for(int i=0;i<paras.length;i++){
+                if(paras[i] instanceof Boolean){
+                    pclss[i] = Boolean.TYPE;
+                }else if(paras[i] instanceof Integer){
+                    pclss[i] = Integer.TYPE;
+                }else if(paras[i] instanceof Long){
+                    pclss[i] = Long.TYPE;
+                }
+                else{
+                    pclss[i] = paras[i].getClass();
+                }
+
+            }
+            Class mo = object.getClass();
+            try {
+                Method me = mo.getMethod(method,pclss);
+                me.setAccessible(true);
+                return me.invoke(object,paras);
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        }catch (Throwable t){}
+        return null;
     }
 
     public static Object callStaticMethod(String className,String methodName,Object... paras){
@@ -47,7 +74,18 @@ public class Reflection {
             for(int i=0;i<paras.length;i++){
                 classes[i] = paras[i].getClass();
             }
-            Method method = cl.getMethod(methodName, classes);
+            Method method = cl.getDeclaredMethod(methodName, classes);
+            return method.invoke(cl,paras);
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Object callStaticMethod(String className,String methodName, Class[] classes, Object... paras){
+        try {
+
+            Class cl = (Class) Reflection.callStaticMethod("java.lang.Class","forName",className);
+            Method method = cl.getDeclaredMethod(methodName, classes);
             return method.invoke(cl,paras);
         } catch (Throwable e) {
             throw new RuntimeException(e);
