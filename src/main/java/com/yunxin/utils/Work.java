@@ -12,6 +12,7 @@ import com.yunxin.utils.ui.TrayPopupMenu;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.*;
 import java.nio.file.Path;
@@ -77,6 +78,41 @@ public class Work {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("没有md5这个算法！");
         }
+    }
+
+    public static byte[] getResource(String path){
+        InputStream is = Work.class.getClassLoader().getResourceAsStream(path);
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        byte[] tmp = new byte[100];
+        int readCount = 0;
+        try {
+            while ((readCount = is.read(tmp)) > 0) {
+                os.write(tmp,0,readCount);
+            }
+
+            is.close();
+            return os.toByteArray();
+        }catch (Throwable t){
+            return null;
+        }
+    }
+
+    public static BufferedImage transparent(BufferedImage image, Color... colors){
+        BufferedImage image1 = new BufferedImage(image.getWidth(),image.getHeight(),BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = image1.createGraphics();
+        g2d.drawImage(image,null,0,0);
+        g2d.dispose();
+        int[] d = new int[4];
+        for(int i=0;i<image1.getWidth();i++){
+            for(int j=0;j<image1.getHeight();j++){
+                image1.getRaster().getPixel(i,j,d);
+                if((d[0]==255)&&(d[1]==255)&&(d[2]==255)){
+                    d[3] =0;
+                    image1.getRaster().setPixel(i,j,d);
+                }
+            }
+        }
+        return image1;
     }
 
     /** 下划线转驼峰
@@ -723,6 +759,15 @@ public class Work {
 
     public static class Packer{
         public static class YxPack1 {
+
+            public static byte[] packWell(byte[] data){
+                byte[] b4 = Work.Bytes.random(4);
+                Pack pack = new Pack();
+                pack.setBin(b4);
+                pack.setBin(pack(data,b4));
+                return pack.getAll();
+            }
+
             public static byte[] pack(byte[] data, byte[] b4){
                 byte[] key = Work.Security.YxH1.getKey(b4);
                 byte[] dd = Work.Security.Tea.encrypt(data,key);
@@ -736,6 +781,8 @@ public class Work {
             }
         }
     }
+
+
 
 
 

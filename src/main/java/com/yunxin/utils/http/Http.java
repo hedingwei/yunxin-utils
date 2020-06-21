@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Http {
+
     /**
      * post 请求
      *
@@ -48,7 +49,6 @@ public class Http {
         return in;
     }
 
-
     public static InputStream postAsBinary(String url, String json, Map<String,String> header ) throws Throwable {
         URL realurl = null;
         InputStream in = null;
@@ -86,7 +86,6 @@ public class Http {
         }
         return in;
     }
-
 
     public static byte[] postAsBinary(String url, String json, String... headers ) throws Throwable {
         URL realurl = null;
@@ -173,8 +172,6 @@ public class Http {
         return stream2String(in);
     }
 
-
-
     public static InputStream postAsBinary(String url, byte[] body, Map<String,String> header) throws Throwable {
         URL realurl = null;
         InputStream in = null;
@@ -211,7 +208,6 @@ public class Http {
         }
         return in;
     }
-
 
     /**
      * @param url http://xx.sss.com?a=b&aa=bb

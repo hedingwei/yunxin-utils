@@ -6,6 +6,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 public class GZip {
+
     /***
      * 压缩GZip
      *
