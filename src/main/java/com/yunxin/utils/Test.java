@@ -1,42 +1,24 @@
 package com.yunxin.utils;
 
-import com.yunxin.utils.ui.SystemTrayManager;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.URL;
+import java.util.Arrays;
 
 public class Test implements ITest {
 
     public static void main(String[] args) throws Throwable {
 
 
-        SystemTrayManager.getInstance().setTrayIconImage(ImageIO.read(new URL("http://120.76.121.210/hbqq/trayicon.jpg")));
-        SystemTrayManager.getInstance().setTrayIconActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("hello action");
-            }
-        });
-        SystemTrayManager.getInstance().setTrayIconText("hh");
-        SystemTrayManager.getInstance().getPopupMenu().add(new JMenuItem("hhh"){
-            {
-                addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+        byte[] d = Work.Bytes.random(4);
+        short[] s = new short[d.length];
+        for(int i=0;i<s.length;i++){
+            s[i] = Work.Bytes.ubyte(d[i]);
+        }
+        Arrays.sort(s);
 
-                    }
-                });
-            }
-        });
-        SystemTrayManager.getInstance().rebuild();
-        /**
-         *  SystemTray.setTrayIconImage(image);
-         *  SystemTray.setTrayActionListener(actionListener);
-         *  SystemTray.getPopupMenu();
-         *  SystemTray.rebuild();
-         */
+        for(int i=0;i<s.length;i++){
+            System.out.println(s[i]);
+        }
+
+
+
     }
 }

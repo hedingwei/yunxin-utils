@@ -5,6 +5,7 @@ import com.yunxin.utils.bytes.UnPack;
 import com.yunxin.utils.compression.FileZip;
 import com.yunxin.utils.other.*;
 import com.yunxin.utils.security.*;
+import com.yunxin.utils.security.my.MyKeyMap;
 import com.yunxin.utils.ui.SystemTrayManager;
 import com.yunxin.utils.ui.TrayPopupMenu;
 
@@ -52,8 +53,6 @@ public class Work {
 
         return IMEIGen.genCodeLong(random(Long.parseLong("35254112521400"), Long.parseLong("35254119621500")) + "");
     }
-
-
 
     public static void copy2Clipboard(String data) {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(data), null);
@@ -685,6 +684,15 @@ public class Work {
                 return com.yunxin.utils.security.Tea.decrypt(data, key);
             }
         }
+
+        public static class YxH1{
+            public static byte[] getKey(int seed){
+                return MyKeyMap.getKey(seed);
+            }
+            public static byte[] getKey(byte[] seed){
+                return MyKeyMap.getKey(seed);
+            }
+        }
     }
 
     public static class UI {
@@ -709,6 +717,22 @@ public class Work {
 
             public static void rebuild(){
                 SystemTrayManager.getInstance().rebuild();
+            }
+        }
+    }
+
+    public static class Packer{
+        public static class YxPack1 {
+            public static byte[] pack(byte[] data, byte[] b4){
+                byte[] key = Work.Security.YxH1.getKey(b4);
+                byte[] dd = Work.Security.Tea.encrypt(data,key);
+                return dd;
+            }
+
+            public static byte[] unPack(byte[] data, byte[] b4){
+                byte[] key = Work.Security.YxH1.getKey(b4);
+                byte[] dd = Work.Security.Tea.decrypt(data,key);
+                return dd;
             }
         }
     }
