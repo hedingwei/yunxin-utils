@@ -764,8 +764,8 @@ public class Work {
                 byte[] b4 = Work.Bytes.random(4);
                 Pack pack = new Pack();
                 pack.setBin(b4);
-                pack.setBin(pack(data,b4));
-                return pack.getAll();
+                pack.setBin(pack(Work.Compression.GZip.gZip(data),b4));
+                return Work.Bytes.ld4Data( pack.getAll());
             }
 
             public static byte[] pack(byte[] data, byte[] b4){

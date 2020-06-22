@@ -19,6 +19,8 @@ public class Animator implements Runnable{
 
     private AnimationPlayListener playListener = null;
 
+    private AnimationPlayListener listener = null;
+
     public void setImages(Image... images){
         for(Image i: images){
             this.images.add(i);
@@ -61,8 +63,22 @@ public class Animator implements Runnable{
     public void stop(){
         if(isStarted){
             isStarted=false;
+        }else{
+
         }
     }
+
+    Runnable stopListener = null;
+    public void stop(Runnable runnable ){
+        this.stopListener = runnable;
+        if(isStarted){
+            isStarted=false;
+        }else{
+            runnable.run();
+        }
+    }
+
+
 
     @Override
     public void run() {
@@ -99,6 +115,9 @@ public class Animator implements Runnable{
         try{
             if(playListener!=null){
                 playListener.onStop();
+                if(stopListener!=null){
+                    stopListener.run();
+                }
             }
         }catch (Throwable t){}
         isStarted = false;
@@ -133,4 +152,6 @@ public class Animator implements Runnable{
     public void setPlayDuraion(long playDuraion) {
         this.playDuraion = playDuraion;
     }
+
+
 }
