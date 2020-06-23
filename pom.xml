@@ -21,6 +21,11 @@
 			<version>1.18.2</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.github.oshi</groupId>
+			<artifactId>oshi-core</artifactId>
+			<version>3.10.0</version>
+		</dependency>
 	</dependencies>
 
 </project>

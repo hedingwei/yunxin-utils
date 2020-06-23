@@ -27,7 +27,6 @@ public class MyKeyMap {
         short[] shorts = new short[seeds.length];
         for (int i = 0; i < shorts.length; i++) {
             shorts[i] = Work.Bytes.ubyte(seeds[i]);
-//            System.out.println(i + ":" + shorts[i]);
         }
         Arrays.sort(shorts);
         int size = shorts[2] - shorts[0] + (shorts[3] - shorts[1]);

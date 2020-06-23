@@ -3,6 +3,8 @@ package com.yunxin.utils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Reflection {
 
@@ -172,10 +174,24 @@ public class Reflection {
 
     }
 
+    public static Map<String,Object> getPcInfo(){
+        try {
+            Object systemInfoObject = Class.forName("oshi.SystemInfo").newInstance();
+            Object hardwareObject = callObjectMethodWithReturnValue(systemInfoObject,"getHardware");
+            Object computerSystemObject = callObjectMethodWithReturnValue(hardwareObject,"getComputerSystem");
+            Object os = callObjectMethodWithReturnValue(systemInfoObject,"getOperatingSystem");
+            Map<String,Object> map = new HashMap<>();
+            map.put("os",os);
+            map.put("cs",computerSystemObject);
+            return map;
+
+        } catch (Throwable e) {
+            return null;
+        }
+    }
 
     public static String generateUUIDPerComputer(){
         try {
-
             Object systemInfoObject = Class.forName("oshi.SystemInfo").newInstance();
             Object hardwareObject = callObjectMethodWithReturnValue(systemInfoObject,"getHardware");
             Object computerSystemObject = callObjectMethodWithReturnValue(hardwareObject,"getComputerSystem");
@@ -239,4 +255,7 @@ public class Reflection {
     }
 
 
+    public static void main(String[] args) {
+        Reflection.generateUUIDPerComputer();
+    }
 }
