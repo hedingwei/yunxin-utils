@@ -109,18 +109,10 @@ public class MethodCallSpeedControllerBuilder<T> {
                 if(id%100==0){
                     System.out.println("["+id+"]+c["+current+"]->"+controllerConfiguration.map.get(current)+ " total: "+controllerConfiguration.counter.get() );
                 }
-
             }
-
-
-
-
 
             Object o = null;
             o = method.invoke(this.object,args);
-//            synchronized (this){
-//
-//            }
 
             return o;
         }

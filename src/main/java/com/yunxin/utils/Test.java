@@ -8,8 +8,6 @@ public class Test implements ITest {
     static long startTime = 0;
     public static void main(String[] args) throws Throwable {
 
-
-
         ParallelJob job = new ParallelJob(500, new ParallelJob.TaskDoneListener() {
             @Override
             public void onTaskDone(ParallelJob job) {
