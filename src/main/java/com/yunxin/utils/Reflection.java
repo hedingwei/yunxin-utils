@@ -242,6 +242,7 @@ public class Reflection {
     public static Object string2JSonObject(String s){
         return callStaticMethod("com.alibaba.fastjson.JSON","parseObject",s);
     }
+
     public  static <T> T json2JavaObject(Object jsonObject, Class<T> type){
         return (T) Reflection.callObjectMethodWithReturnValue(jsonObject,"toJavaObject",type);
     }
@@ -253,7 +254,6 @@ public class Reflection {
     public static String javaObject2JSONString(Object object){
         return (String) callStaticMethod("com.alibaba.fastjson.JSON","toJSONString",new Class[]{Object.class},object);
     }
-
 
     public static void main(String[] args) {
         Reflection.generateUUIDPerComputer();

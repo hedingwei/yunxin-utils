@@ -143,8 +143,6 @@ public class YxBinUtil {
 
         cmd.getCmdMap().put("abc",cmd1);
 
-
-
         System.out.println(Work.Bytes.hex(toBytes(cmd)));
     }
 

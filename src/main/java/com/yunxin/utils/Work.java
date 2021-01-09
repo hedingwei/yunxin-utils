@@ -37,12 +37,24 @@ import java.util.Random;
  */
 public class Work {
 
+    /**
+     * 指定范围内的随机数
+     * @param min
+     * @param max
+     * @return
+     */
     public static int random(int min, int max) {
         Random random = new Random();
         int randNumber = random.nextInt(max - min + 1) + min;
         return randNumber;
     }
 
+    /**
+     * 指定范围内的随机数
+     * @param min
+     * @param max
+     * @return
+     */
     public static long random(long min, long max) {
         long dt = max - min;
         long rand = (long) (Math.random() * dt + min);
@@ -54,6 +66,7 @@ public class Work {
 
         return IMEIGen.genCodeLong(random(Long.parseLong("35254112521400"), Long.parseLong("35254119621500")) + "");
     }
+
 
     public static void copy2Clipboard(String data) {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(data), null);
@@ -89,7 +102,6 @@ public class Work {
             while ((readCount = is.read(tmp)) > 0) {
                 os.write(tmp,0,readCount);
             }
-
             is.close();
             return os.toByteArray();
         }catch (Throwable t){
@@ -411,7 +423,7 @@ public class Work {
 
     public static class Compression{
 
-        com.yunxin.utils.compression.GZip gZip;
+
 
         public static class GZip{
             public static byte[] gZip(byte[] data) {
@@ -424,7 +436,7 @@ public class Work {
         }
 
         public static class Zip {
-            com.yunxin.utils.compression.Zip zip;
+
 
             public static void zip(File raw, File compressed) throws IOException {
                 com.yunxin.utils.compression.Zip.zip(raw, compressed);
@@ -710,7 +722,6 @@ public class Work {
         }
 
         public static class Tea{
-            com.yunxin.utils.security.Tea t;
 
             public static byte[] encrypt(byte[] data, byte[] key) {
                 return com.yunxin.utils.security.Tea.encrypt(data, key);

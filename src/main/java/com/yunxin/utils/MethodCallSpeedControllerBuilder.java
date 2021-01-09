@@ -55,9 +55,6 @@ public class MethodCallSpeedControllerBuilder<T> {
 
     }
 
-
-
-
     public static class SpeedControllerHandler implements InvocationHandler {
 
         public static Map<Class, SpeedControllerHandler.SpeedControllerConfiguration> configurationInstance = new HashMap<>();
